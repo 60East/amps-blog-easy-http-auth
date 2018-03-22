@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AMPSConfig>
+    <Name>demo-server</Name>
+    <Admin>
+        <FileName>stats.db</FileName>
+        <InetAddr>localhost:8085</InetAddr>
+        <Authentication>
+            <Module>web-entitlements</Module>
+        </Authentication>
+        <Entitlement>
+            <Module>web-entitlements</Module>
+        </Entitlement>
+        <WWWAuthenticate>Basic realm="AMPS Admin"</WWWAuthenticate>
+    </Admin>
+    <Modules>
+        <Module>
+            <Name>web-entitlements</Name>
+            <Library>libamps_http_entitlement.so</Library>
+            <Options>
+                <ResourceURI>http://localhost:8500/{{USER_NAME}}</ResourceURI>
+                <HTTPHeader>x-tracking-id: {{CORRELATION_ID}}</HTTPHeader>
+                <HTTPHeader>x-origin: AMPS</HTTPHeader>
+            </Options>
+        </Module>
+    </Modules>
+    <Transports>
+        <Transport>
+            <Name>tcp-any</Name>
+            <Protocol>amps</Protocol>
+            <Type>tcp</Type>
+            <InetAddr>9007</InetAddr>
+            <ReuseAddr>true</ReuseAddr>
+            <Authentication>
+                <Module>web-entitlements</Module>
+            </Authentication>
+            <Entitlement>
+                <Module>web-entitlements</Module>
+            </Entitlement>
+        </Transport>
+    </Transports>
+    <Logging>
+        <Target>
+            <Protocol>file</Protocol>
+            <Level>developer</Level>
+            <FileName>logs/amps.log</FileName>
+        </Target>
+    </Logging>
+</AMPSConfig>
