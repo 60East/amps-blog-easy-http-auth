@@ -3,8 +3,7 @@ Basic Authentication code is based on the code snippet by
 Armin Ronacher: http://flask.pocoo.org/snippets/8/
 """
 
-from flask import Flask
-from flask import request, Response
+from flask import Flask, request, Response
 from functools import wraps
 
 
@@ -14,7 +13,7 @@ app = Flask(__name__)
 
 def check_auth(username, password):
     """This function is called to check if a username/password is valid."""
-    return username == 'mylogin' and password == 'mypass'
+    return username == 'falken' and password == 'joshua'
 
 
 def authenticate():
@@ -63,5 +62,5 @@ def permission_document(username):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8500)
+    app.run(host='0.0.0.0', port=8080)
 
